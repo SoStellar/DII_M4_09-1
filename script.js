@@ -1,4 +1,4 @@
-var students = [
+/*var students = [
     {
         name : 'คุณลุง',
         username : 'a@b.com',
@@ -34,7 +34,7 @@ function addStudentData(student) {
     addRow(output, 'ชื่อ', student.name)
     addRow(output, 'รหัส', student.username)
     addRow(output, 'เพศ', student.gender)
-}
+}*/
 
 function addStudentToTable(index,student){
     const tableBody = document.getElementById('tableBody')
@@ -47,7 +47,14 @@ function addStudentToTable(index,student){
     cell.innerHTML = student.name
     row.appendChild(cell)
     cell = document.createElement('td')
-    cell.innerHTML = student.username
+    cellbeforeImg= document.createElement('div')
+    cellbeforeImg.classList.add('img-fluid')
+    let img = document.createElement('img')
+    img.setAttribute('src',student.imageLink)
+    img.classList.add('img-thumbnails')
+    img.style.width = "5rem"
+    cellbeforeImg.appendChild(img)
+    cell.appendChild(cellbeforeImg)
     row.appendChild(cell)
     cell = document.createElement('td')
     cell.innerHTML = student.gender
@@ -60,12 +67,23 @@ function addStudentList(studentList){
         addStudentToTable(counter++,student)
     }
 }
-function addStudentArray(name,username,gender){
+/*function addStudentArray(name,username,gender){
     console.log(nameText)
     console.log(usernameText)
     console.log(genderText)
     addStudentList(students)
 }
+
 submitButton.addEventListener('click', function () {
     addStudentArray(nameText,usernameText,genderText)
-})
+})*/
+
+function onLoad(){
+    fetch('asset/students2.json').then(response => {
+        return response.json()
+    })
+        .then(data => {
+            let students = data
+            addStudentList(data)
+        })
+}
