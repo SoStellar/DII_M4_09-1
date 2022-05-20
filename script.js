@@ -1,16 +1,18 @@
 var students = [
-    student={
+    {
         name : 'คุณลุง',
         username : 'a@b.com',
-        gender: 'ชาย',
+        gender : 'ชาย',
     },
-    stu2={
+    {
         name :'สมรักษ์',
         username: 'm@n.com',
         gender: 'ชาย',
     }
-
 ]
+let nameText = document.getElementById('autoSizingInput')
+let usernameText = document.getElementById('autoSizingInputGroup')
+let genderText = document.getElementById('autoSizingSelect')
 console.log(students)
 //document.getElementById('output').innerText = student.name;
 function addRow(container, key, value) {
@@ -34,7 +36,36 @@ function addStudentData(student) {
     addRow(output, 'เพศ', student.gender)
 }
 
-window.addEventListener('load', function () {
-    addStudentData(student)
-    addStudentData(stu2)
+function addStudentToTable(index,student){
+    const tableBody = document.getElementById('tableBody')
+    let row = document.createElement('tr')
+    let cell = document.createElement('th')
+    cell.setAttribute('scope','row')
+    cell.innerHTML = index
+    row.appendChild(cell)
+    cell = document.createElement('td')
+    cell.innerHTML = student.name
+    row.appendChild(cell)
+    cell = document.createElement('td')
+    cell.innerHTML = student.username
+    row.appendChild(cell)
+    cell = document.createElement('td')
+    cell.innerHTML = student.gender
+    row.appendChild(cell)
+    tableBody.appendChild(row)
+}
+function addStudentList(studentList){
+    let counter = 1
+    for(student of studentList){
+        addStudentToTable(counter++,student)
+    }
+}
+function addStudentArray(name,username,gender){
+    console.log(nameText)
+    console.log(usernameText)
+    console.log(genderText)
+    addStudentList(students)
+}
+submitButton.addEventListener('click', function () {
+    addStudentArray(nameText,usernameText,genderText)
 })
